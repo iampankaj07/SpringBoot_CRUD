@@ -2,26 +2,40 @@ package com.crud.crud_springboot.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
+
+@Getter
+@Setter
 @Entity
 public class EmployeeModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private   Integer id;
-
-    private  String employeName;
+    private Integer id;
 
 
-    private  String phoneNo;
-    private  String sallary;
 
 
-    private  String address;
+    @NotBlank(message = "Please enter employee name")
+    @NotNull(message = "Please enter employee name")
+    private String employeName;
+
+
+    private String phoneNo;
+    private String sallary;
+
+
+    private String address;
 
     public EmployeeModel() {
     }
@@ -34,44 +48,6 @@ public class EmployeeModel {
         this.address = address;
     }
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getEmployeName() {
-        return employeName;
-    }
-
-    public void setEmployeName(String employeName) {
-        this.employeName = employeName;
-    }
-
-    public String getPhoneNo() {
-        return phoneNo;
-    }
-
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
-    }
-
-    public String getSallary() {
-        return sallary;
-    }
-
-    public void setSallary(String sallary) {
-        this.sallary = sallary;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 }
 
