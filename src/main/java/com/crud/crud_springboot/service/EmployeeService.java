@@ -37,7 +37,10 @@ public class EmployeeService {
 //        List<EmployeModel> emplyee = new ArrayList<EmployeModel>();
         return employeeRepository.findAll();
     }
-    public void  deleteData(int id){
-        employeeRepository.deleteById(id);
+    public String  deleteData(int id){
+        if (employeeRepository.findById(id).isPresent()) {
+            employeeRepository.deleteById(id);
+        return "Employee deleted successfully";
+        } else  return  "No employee record found";
     }
 }

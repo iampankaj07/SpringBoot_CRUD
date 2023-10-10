@@ -42,4 +42,8 @@ public class EmployeeController {
    System.out.println(updatedData);
     return new Response<EmployeeModel>(200,"Update Success",updatedData);
     }
+    @DeleteMapping("delete/{id}")
+    public  String deleteEmployee(@PathVariable("id") int id){
+      return   employeeService.deleteData(id);
+    }
 }
