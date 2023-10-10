@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -17,8 +18,19 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public void updteData(EmployeeModel employee, int id) {
-//        employeeRepository.save(employee);
+    public EmployeeModel updateData(EmployeeModel employee, int id) {
+        Optional<EmployeeModel> dataToUpdate = employeeRepository.findById(id);
+        if (dataToUpdate.isPresent()) {
+            EmployeeModel employeeData = dataToUpdate.get();
+            employeeData.setEmployeName(employee.getEmployeName());
+            employeeData.setAddress(employee.getAddress());
+            employeeData.setSallary(employee.getSallary());
+            employeeData.setPhoneNo(employee.getPhoneNo());
+            return employeeRepository.save(employeeData);
+
+        }
+        else return null;
+
     }
 
     public List<EmployeeModel> getData() {

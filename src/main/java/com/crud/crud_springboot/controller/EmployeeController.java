@@ -5,10 +5,7 @@ import com.crud.crud_springboot.dto.Response;
 import com.crud.crud_springboot.model.EmployeeModel;
 import com.crud.crud_springboot.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -29,7 +26,7 @@ public class EmployeeController {
         List<EmployeeModel> data = employeeService.getData();
         return Response
                 .<List<EmployeeModel>>builder()
-
+                .message("Success")
                 .code(200)
                 .data(data)
                 .build();
@@ -38,5 +35,11 @@ public class EmployeeController {
     @PostMapping("postEmployee")
     public EmployeeModel postEmployee(@RequestBody EmployeeModel employee) {
         return employeeService.postData(employee);
+    }
+    @PatchMapping("updateEmployee/{id}")
+    public Response<EmployeeModel> updateEmployee(@PathVariable("id") int id, @RequestBody EmployeeModel employee) {
+   EmployeeModel updatedData= employeeService.updateData(employee,id);
+   System.out.println(updatedData);
+    return new Response<EmployeeModel>(200,"Update Success",updatedData);
     }
 }

@@ -16,7 +16,7 @@ public class EmployeeModel {
 
     private  String employeName;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+
     private  String phoneNo;
     private  String sallary;
 
